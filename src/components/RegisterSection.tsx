@@ -34,7 +34,7 @@ const inputClass =
 
 const RegisterSection = () => {
   const [step, setStep] = useState<Step>("form");
-  const [formData, setFormData] = useState({ name: "", email: "", college: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", rollNumber: "", branchSection: "", college: "" });
   const [utr, setUtr] = useState("");
   const [screenshot, setScreenshot] = useState<File | null>(null);
 
@@ -43,10 +43,40 @@ const RegisterSection = () => {
     setStep("instructions");
   };
 
-  const handlePaymentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+   if (!screenshot) {
+    alert("Please upload payment screenshot");
+    return;
+  }
+  const data = {
+  name: formData.name,
+  email: formData.email,
+  phone: formData.phone,
+  rollNumber: formData.rollNumber,
+  branchSection: formData.branchSection,
+  college: formData.college,
+  utr: utr,
+  screenshot: screenshot ? screenshot.name : ""
+};
+
+
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbxwVaNV0wRQA9DF9d0hsJt9aieMed3gCwrHSfg_VQFJIaQaZviSXM-2j5tr9RD-95SZ/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
     setStep("success");
-  };
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
   const closeModal = () => {
     setStep("form");
@@ -104,6 +134,39 @@ const RegisterSection = () => {
                 placeholder="you@example.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className="text-sm text-muted-foreground mb-1.5 block">Phone Number</label>
+              <input
+                type="tel"
+                required
+                placeholder="Enter phone number"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className="text-sm text-muted-foreground mb-1.5 block">Roll Number</label>
+              <input
+                type="text"
+                required
+                placeholder="Enter roll number"
+                value={formData.rollNumber}
+                onChange={(e) => setFormData({ ...formData, rollNumber: e.target.value })}
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className="text-sm text-muted-foreground mb-1.5 block">Branch & Section</label>
+              <input
+                type="text"
+                required
+                placeholder="CSE - 1"
+                value={formData.branchSection}
+                onChange={(e) => setFormData({ ...formData, branchSection: e.target.value })}
                 className={inputClass}
               />
             </div>
@@ -196,8 +259,12 @@ const RegisterSection = () => {
 
                   {/* QR Code placeholder */}
                   <div className="flex flex-col items-center gap-3">
-                    <div className="w-48 h-48 rounded-xl bg-muted border border-border flex items-center justify-center">
-                      <QrCode className="w-24 h-24 text-muted-foreground/30" />
+                    <div className="w-48 h-48 rounded-xl overflow-hidden border border-border bg-white p-2">
+                      <img
+                        src="/payment-qr.png"
+                        alt="Payment QR"
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold text-gradient">₹200</p>
