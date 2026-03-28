@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import DetailsSection from "@/components/DetailsSection";
-import WhatYoullLearnSection from "@/components/Temp";
+import WhatYoullLearnSection from "@/components/WhatYoullLearnSection";
 import TopicsSection from "@/components/TopicsSection";
 import WhoShouldAttendSection from "@/components/WhoShouldAttendSection";
 import WorkshopHighlightsSection from "@/components/WorkshopHighlightsSection";
