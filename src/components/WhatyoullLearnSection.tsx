@@ -13,7 +13,6 @@ const skills = [
 
 const WhatYoullLearnSection = () => (
   <section className="py-24 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent pointer-events-none" />
     <div className="container max-w-5xl relative z-10">
       <ScrollReveal>
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">

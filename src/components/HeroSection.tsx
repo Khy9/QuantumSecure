@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import AuroraBackground from "./AuroraBackground";
 
 const stagger = {
   hidden: {},
@@ -18,9 +17,7 @@ const fadeUp = {
 };
 
 const HeroSection = () => (
-  <section className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
-    <AuroraBackground />
-
+  <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
     <motion.div
       variants={stagger}
       initial="hidden"

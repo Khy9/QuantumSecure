@@ -11,14 +11,13 @@ const highlights = [
 
 const WorkshopHighlightsSection = () => (
   <section className="py-24 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-secondary/[0.02] to-transparent pointer-events-none" />
     <div className="container max-w-4xl relative z-10">
       <ScrollReveal>
         <div className="text-center mb-14">
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="inline-block glass-subtle px-4 py-1.5 rounded-full text-xs font-mono text-primary mb-4"
           >
             ⚡ Limited Seats Available
