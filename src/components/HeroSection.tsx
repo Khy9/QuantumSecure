@@ -17,7 +17,7 @@ const fadeUp = {
 };
 
 const HeroSection = () => (
-  <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <section className="relative min-h-[calc(100vh-70px)] flex items-center justify-center overflow-hidden">
     <motion.div
       variants={stagger}
       initial="hidden"
