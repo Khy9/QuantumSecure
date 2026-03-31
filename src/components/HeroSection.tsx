@@ -32,7 +32,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[80vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden -mt-4 sm:-mt-6">
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -40,11 +40,11 @@ const HeroSection = () => {
         className="container relative z-10 text-center px-4 sm:px-6"
       >
         {/* Institutional Logos */}
-        <motion.div variants={fadeUp} className="flex items-center justify-center gap-3 sm:gap-5 mb-6 sm:mb-8">
+        <motion.div variants={fadeUp} className="flex items-center justify-center gap-5 sm:gap-7 md:gap-8 mb-6 sm:mb-8">
           {logos.map((logo) => (
             <div
               key={logo.alt}
-              className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 ${logo.round ? "rounded-full" : "rounded-lg"} overflow-hidden bg-background/80 flex items-center justify-center p-1 border border-border/30 backdrop-blur-sm`}
+              className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 ${logo.round ? "rounded-full" : "rounded-xl"} overflow-hidden glass-subtle flex items-center justify-center p-1.5 sm:p-2`}
             >
               <img
                 src={logo.src}
@@ -87,13 +87,16 @@ const HeroSection = () => {
 
         <motion.div variants={fadeUp}>
           <motion.button
-            onClick={() => navigate("/register")}
+            onClick={() => {
+              const el = document.getElementById("register");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="btn-glow-premium inline-block bg-primary text-primary-foreground px-8 sm:px-10 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-semibold"
           >
-            Register Now
+            Register
           </motion.button>
         </motion.div>
       </motion.div>

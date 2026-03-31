@@ -78,22 +78,20 @@ const Navbar = () => {
       transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-2xl border-b border-border/40 py-2"
-          : "bg-transparent py-3"
+          ? "backdrop-blur-2xl border-b border-border/40 py-3.5"
+          : "bg-transparent py-4"
       }`}
       style={scrolled ? { background: "hsl(var(--background) / 0.85)" } : { background: "hsl(var(--background) / 0.6)" }}
     >
       <div className="container flex items-center justify-between gap-3">
-        {/* Left: Logo + Title */}
-        <a href="/" className="flex items-center gap-1.5 group flex-shrink-0">
-          <Shield className="w-5 h-5 text-primary transition-all duration-300 group-hover:drop-shadow-[0_0_8px_hsl(192,95%,55%)]" />
-          <span className="font-bold text-base text-foreground whitespace-nowrap">
+        <a href="/" className="flex items-center gap-2 group flex-shrink-0">
+          <Shield className="w-6 h-6 text-primary transition-all duration-300 group-hover:drop-shadow-[0_0_8px_hsl(192,95%,55%)]" />
+          <span className="font-bold text-lg text-foreground whitespace-nowrap">
             Quantum<span className="text-primary">Secure</span>
           </span>
         </a>
 
-        {/* Right: Nav links (desktop) */}
-        <div className="hidden lg:flex items-center gap-5">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -113,7 +111,6 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="lg:hidden text-foreground p-2 z-[60]"
@@ -122,7 +119,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <>
