@@ -4,10 +4,14 @@ import AboutSection from "@/components/AboutSection";
 import DetailsSection from "@/components/DetailsSection";
 import WhatYoullLearnSection from "@/components/WhatYoullLearnSection";
 import TopicsSection from "@/components/TopicsSection";
+import RegisterSection from "@/components/RegisterSection";
 import WhoShouldAttendSection from "@/components/WhoShouldAttendSection";
 import WorkshopHighlightsSection from "@/components/WorkshopHighlightsSection";
 import ScheduleSection from "@/components/ScheduleSection";
 import ContactSection from "@/components/ContactSection";
+import CommitteeSection from "@/components/CommitteeSection";
+import OutreachPartnerSection from "@/components/OutreachPartnerSection";
+import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import AuroraBackground from "@/components/AuroraBackground";
 
@@ -27,7 +31,11 @@ const Index = () => (
       <WhoShouldAttendSection />
       <WorkshopHighlightsSection />
       <ScheduleSection />
+      <RegisterSection />
+      <CommitteeSection />
       <ContactSection />
+      <FAQSection />
+      <OutreachPartnerSection />
       <Footer />
     </div>
   </div>
