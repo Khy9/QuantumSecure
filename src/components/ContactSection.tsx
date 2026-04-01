@@ -9,10 +9,10 @@ const contacts = [
 ];
 
 const ContactSection = () => (
-  <section id="contact" className="py-24">
+  <section id="contact" className="py-16 sm:py-20 lg:py-24">
     <div className="container max-w-3xl text-center">
       <ScrollReveal>
-        <h2 className="text-3xl sm:text-4xl font-bold mb-10">
+        <h2 className="mb-10 text-3xl font-bold sm:text-4xl">
           Get in <span className="text-gradient">Touch</span>
         </h2>
       </ScrollReveal>
@@ -29,7 +29,7 @@ const ContactSection = () => (
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass rounded-xl p-6 card-lift block text-center"
+              className="glass card-lift block rounded-xl p-5 text-center sm:p-6"
             >
               <item.icon className="w-7 h-7 text-primary mx-auto mb-3" />
               <p className="text-xs text-muted-foreground mb-1">{item.label}</p>
@@ -48,7 +48,7 @@ const ContactSection = () => (
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {contacts.map((c, i) => (
           <ScrollReveal key={c.name} delay={0.25 + i * 0.08}>
-            <div className="glass rounded-xl p-5 card-lift flex items-center gap-4 text-left">
+            <div className="glass card-lift flex items-center gap-4 rounded-xl p-4 text-left sm:p-5">
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Phone className="w-4 h-4 text-primary" />
               </div>

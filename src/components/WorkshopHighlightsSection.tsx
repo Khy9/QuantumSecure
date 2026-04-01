@@ -10,15 +10,15 @@ const highlights = [
 ];
 
 const WorkshopHighlightsSection = () => (
-  <section className="py-24 relative overflow-hidden">
+  <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
     <div className="container max-w-4xl relative z-10">
       <ScrollReveal>
-        <div className="text-center mb-14">
+        <div className="mb-10 text-center sm:mb-14">
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false }}
-            className="inline-block glass-subtle px-4 py-1.5 rounded-full text-xs font-mono text-primary mb-4"
+              className="mb-4 inline-block rounded-full px-4 py-1.5 text-center text-xs font-mono text-primary glass-subtle"
           >
             ⚡ Limited Seats Available
           </motion.span>
@@ -33,7 +33,7 @@ const WorkshopHighlightsSection = () => (
             <motion.div
               whileHover={{ y: -5, scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="glass rounded-2xl p-7 h-full card-glow group"
+              className="glass card-glow group h-full rounded-2xl p-6 sm:p-7"
             >
               <div className="w-14 h-14 rounded-xl bg-muted flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors duration-300">
                 <item.icon className={`w-7 h-7 ${item.accent} transition-all duration-300 group-hover:drop-shadow-[0_0_10px_hsl(192,95%,55%,0.5)]`} />

@@ -4,7 +4,7 @@ const AuroraBackground = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     {/* Primary aurora blob */}
     <motion.div
-      className="absolute -top-1/4 -right-1/4 w-[900px] h-[900px] rounded-full opacity-25"
+      className="absolute -right-1/3 -top-1/4 h-[560px] w-[560px] rounded-full opacity-25 sm:-right-1/4 sm:h-[900px] sm:w-[900px]"
       style={{
         background: "radial-gradient(circle, hsl(var(--neon-cyan) / 0.5), hsl(var(--neon-violet) / 0.25), transparent 70%)",
         filter: "blur(100px)",
@@ -18,7 +18,7 @@ const AuroraBackground = () => (
     />
     {/* Secondary aurora blob */}
     <motion.div
-      className="absolute top-1/4 left-1/6 w-[700px] h-[700px] rounded-full opacity-20"
+      className="absolute left-0 top-1/4 h-[460px] w-[460px] rounded-full opacity-20 sm:left-1/6 sm:h-[700px] sm:w-[700px]"
       style={{
         background: "radial-gradient(circle, hsl(var(--neon-blue) / 0.45), hsl(var(--neon-cyan) / 0.2), transparent 70%)",
         filter: "blur(120px)",
@@ -32,7 +32,7 @@ const AuroraBackground = () => (
     />
     {/* Deep violet accent */}
     <motion.div
-      className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full opacity-15"
+      className="absolute bottom-1/4 right-1/4 h-[420px] w-[420px] rounded-full opacity-15 sm:h-[600px] sm:w-[600px]"
       style={{
         background: "radial-gradient(circle, hsl(var(--neon-violet) / 0.4), hsl(var(--neon-blue) / 0.15), transparent 70%)",
         filter: "blur(110px)",
@@ -46,7 +46,7 @@ const AuroraBackground = () => (
     />
     {/* Bottom edge glow */}
     <motion.div
-      className="absolute -bottom-1/3 left-1/3 w-[500px] h-[500px] rounded-full opacity-15"
+      className="absolute -bottom-1/4 left-1/4 h-[340px] w-[340px] rounded-full opacity-15 sm:-bottom-1/3 sm:left-1/3 sm:h-[500px] sm:w-[500px]"
       style={{
         background: "radial-gradient(circle, hsl(var(--neon-cyan) / 0.3), transparent 70%)",
         filter: "blur(90px)",

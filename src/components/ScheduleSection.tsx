@@ -30,7 +30,7 @@ const AnimatedTimeline = ({ events }: { events: typeof schedule[0]["events"] }) 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div ref={ref} className="relative pl-6 space-y-6">
+    <div ref={ref} className="relative space-y-6 pl-5 sm:pl-6">
       <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
       <motion.div
         className="absolute left-0 top-0 w-px bg-primary"
@@ -55,7 +55,7 @@ const AnimatedTimeline = ({ events }: { events: typeof schedule[0]["events"] }) 
             whileInView={{ scale: 1 }}
             viewport={{ once: false }}
             transition={{ duration: 0.4, delay: ei * 0.12 + 0.1, ease: "backOut" }}
-            className="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-primary neon-glow-cyan"
+            className="absolute -left-[27px] top-1 h-3 w-3 rounded-full bg-primary sm:-left-[31px] neon-glow-cyan"
           />
           <p className="text-xs font-mono text-primary mb-1">{event.time}</p>
           <h4 className="font-semibold text-foreground">{event.title}</h4>
@@ -67,19 +67,19 @@ const AnimatedTimeline = ({ events }: { events: typeof schedule[0]["events"] }) 
 };
 
 const ScheduleSection = () => (
-  <section id="schedule" className="py-24">
+  <section id="schedule" className="py-16 sm:py-20 lg:py-24">
     <div className="container max-w-3xl">
       <ScrollReveal>
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
+        <h2 className="mb-10 text-center text-3xl font-bold sm:mb-12 sm:text-4xl">
           Event <span className="text-gradient">Schedule</span>
         </h2>
       </ScrollReveal>
 
-      <div className="space-y-12">
+      <div className="space-y-10 sm:space-y-12">
         {schedule.map((day, di) => (
           <div key={day.day}>
             <ScrollReveal delay={di * 0.1}>
-              <h3 className="text-xl font-bold text-primary mb-6 font-mono">{day.day}</h3>
+              <h3 className="mb-6 font-mono text-lg font-bold text-primary sm:text-xl">{day.day}</h3>
             </ScrollReveal>
             <AnimatedTimeline events={day.events} />
           </div>

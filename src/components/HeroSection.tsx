@@ -32,19 +32,19 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-[80vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden -mt-4 sm:-mt-6">
+    <section className="relative flex min-h-[78vh] items-center justify-center overflow-hidden -mt-4 sm:min-h-[88vh] sm:-mt-6">
       <motion.div
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="container relative z-10 text-center px-4 sm:px-6"
+        className="container relative z-10 px-3 text-center sm:px-6"
       >
         {/* Institutional Logos */}
-        <motion.div variants={fadeUp} className="flex items-center justify-center gap-5 sm:gap-7 md:gap-8 mb-6 sm:mb-8">
+        <motion.div variants={fadeUp} className="mx-auto mb-6 flex max-w-xs flex-wrap items-center justify-center gap-3 sm:mb-8 sm:max-w-none sm:gap-7 md:gap-8">
           {logos.map((logo) => (
             <div
               key={logo.alt}
-              className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 ${logo.round ? "rounded-full" : "rounded-xl"} overflow-hidden glass-subtle flex items-center justify-center p-1.5 sm:p-2`}
+              className={`h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 ${logo.round ? "rounded-full" : "rounded-xl"} glass-subtle flex items-center justify-center overflow-hidden p-1 sm:p-2`}
             >
               <img
                 src={logo.src}
@@ -58,7 +58,7 @@ const HeroSection = () => {
 
         <motion.div
           variants={fadeUp}
-          className="inline-flex items-center gap-2 glass-subtle px-4 sm:px-5 py-2 sm:py-2.5 rounded-full mb-6 sm:mb-8"
+          className="mb-6 inline-flex items-center gap-2 rounded-full px-3 py-2 sm:mb-8 sm:px-5 sm:py-2.5 glass-subtle"
         >
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
           <span className="text-xs sm:text-sm text-muted-foreground font-mono tracking-wide">
@@ -68,19 +68,19 @@ const HeroSection = () => {
 
         <motion.h1
           variants={fadeUp}
-          className="text-4xl sm:text-7xl lg:text-9xl font-extrabold tracking-tighter mb-4"
+          className="mb-4 text-4xl font-extrabold leading-[0.95] tracking-tighter min-[420px]:text-5xl sm:text-7xl lg:text-9xl"
         >
           <span className="text-gradient-glow">Quantum</span>
-          <span className="text-foreground">Secure</span>
+          <span className="block text-foreground sm:inline">Secure</span>
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="text-muted-foreground text-base sm:text-lg mb-2">
+        <motion.p variants={fadeUp} className="mb-2 text-base text-muted-foreground sm:text-lg">
           by <span className="text-foreground font-medium">Digital Defence Club</span>
         </motion.p>
 
         <motion.p
           variants={fadeUp}
-          className="text-muted-foreground text-sm sm:text-lg max-w-xl mx-auto mb-8 sm:mb-12 px-4"
+          className="mx-auto mb-8 max-w-xl px-2 text-sm text-muted-foreground sm:mb-12 sm:px-4 sm:text-lg"
         >
           Workshop on Post-Quantum Cryptography, Blockchain & Ethical Hacking
         </motion.p>
@@ -94,7 +94,7 @@ const HeroSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="btn-glow-premium inline-block bg-primary text-primary-foreground px-8 sm:px-10 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-semibold"
+            className="btn-glow-premium inline-block rounded-xl bg-primary px-7 py-3 text-base font-semibold text-primary-foreground sm:px-10 sm:py-4 sm:text-lg"
           >
             Register
           </motion.button>
@@ -105,7 +105,7 @@ const HeroSection = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.2, duration: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 sm:bottom-8 sm:block"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

@@ -83,11 +83,11 @@ const Navbar = () => {
       }`}
       style={scrolled ? { background: "hsl(var(--background) / 0.85)" } : { background: "hsl(var(--background) / 0.6)" }}
     >
-      <div className="container flex items-center justify-between gap-3">
-        <a href="/" className="flex items-center gap-2 group flex-shrink-0">
-          <Shield className="w-6 h-6 text-primary transition-all duration-300 group-hover:drop-shadow-[0_0_8px_hsl(192,95%,55%)]" />
-          <span className="font-bold text-lg text-foreground whitespace-nowrap">
-            Quantum<span className="text-primary">Secure</span>
+      <div className="container flex min-w-0 items-center justify-between gap-3">
+        <a href="/" className="group flex min-w-0 items-center gap-2">
+          <Shield className="h-6 w-6 flex-shrink-0 text-primary transition-all duration-300 group-hover:drop-shadow-[0_0_8px_hsl(192,95%,55%)]" />
+          <span className="max-w-[9.5rem] truncate font-bold text-base text-foreground sm:max-w-none sm:text-lg">
+            Quantum<span className="text-primary max-[359px]:hidden">Secure</span>
           </span>
         </a>
 
@@ -113,7 +113,7 @@ const Navbar = () => {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-foreground p-2 z-[60]"
+          className="z-[60] flex-shrink-0 p-2 text-foreground lg:hidden"
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -136,7 +136,7 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed top-0 right-0 h-full w-72 z-50 border-l border-border/40 p-8 pt-20 flex flex-col gap-4"
+              className="fixed top-0 right-0 z-50 flex h-full w-full max-w-xs flex-col gap-4 border-l border-border/40 p-6 pt-20 sm:max-w-sm sm:p-8"
               style={{ background: "hsl(var(--background) / 0.95)", backdropFilter: "blur(20px)" }}
             >
               {navLinks.map((link) => (

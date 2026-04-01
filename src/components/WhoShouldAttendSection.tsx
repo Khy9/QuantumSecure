@@ -10,13 +10,13 @@ const audiences = [
 ];
 
 const WhoShouldAttendSection = () => (
-  <section className="py-24 relative">
+  <section className="relative py-16 sm:py-20 lg:py-24">
     <div className="container max-w-4xl">
       <ScrollReveal>
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">
           Who Should <span className="text-gradient">Attend</span>
         </h2>
-        <p className="text-muted-foreground text-center max-w-lg mx-auto mb-14">
+        <p className="mx-auto mb-10 max-w-lg text-center text-muted-foreground sm:mb-14">
           Whether you're a beginner or experienced, there's something for everyone
         </p>
       </ScrollReveal>
@@ -26,7 +26,7 @@ const WhoShouldAttendSection = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="glass rounded-2xl p-6 flex items-start gap-4 h-full card-glow group"
+              className="glass card-glow group flex h-full items-start gap-4 rounded-2xl p-5 sm:p-6"
             >
               <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-muted flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-300">
                 <item.icon className="w-6 h-6 text-primary group-hover:drop-shadow-[0_0_8px_hsl(192,95%,55%,0.6)] transition-all duration-300" />

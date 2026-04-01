@@ -85,9 +85,9 @@ const RegisterSection = () => {
   };
 
   return (
-    <section id="register" className="py-24 relative overflow-hidden">
+    <section id="register" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.06] pointer-events-none"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.06] sm:h-[600px] sm:w-[600px]"
         style={{
           background: "radial-gradient(circle, hsl(192 95% 55%), transparent 70%)",
           filter: "blur(80px)",
@@ -95,7 +95,7 @@ const RegisterSection = () => {
       />
       <div className="container max-w-lg relative z-10">
         <ScrollReveal>
-          <div className="text-center mb-10">
+          <div className="mb-8 text-center sm:mb-10">
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -114,7 +114,7 @@ const RegisterSection = () => {
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
-          <form onSubmit={handleRegister} className="glass rounded-2xl p-8 space-y-5">
+          <form onSubmit={handleRegister} className="glass space-y-5 rounded-2xl p-6 sm:p-8">
             <div>
               <label className="text-sm text-muted-foreground mb-1.5 block">Full Name</label>
               <input
@@ -185,7 +185,7 @@ const RegisterSection = () => {
               type="submit"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="btn-glow-premium w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-lg"
+              className="btn-glow-premium w-full rounded-xl bg-primary py-4 text-base font-semibold text-primary-foreground sm:text-lg"
             >
               Register Now
             </motion.button>
@@ -202,7 +202,7 @@ const RegisterSection = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-50 flex items-center justify-center p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
             style={{ background: "hsl(222 47% 5% / 0.85)", backdropFilter: "blur(12px)" }}
           >
             <motion.div
@@ -211,12 +211,12 @@ const RegisterSection = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="glass rounded-2xl w-full max-w-md p-8 my-8 relative neon-glow-cyan max-h-[85vh] overflow-y-auto"
+              className="glass neon-glow-cyan relative my-4 max-h-[88vh] w-full max-w-md overflow-y-auto rounded-2xl p-5 sm:my-8 sm:p-8"
             >
               {step !== "success" && (
                 <button
                   onClick={closeModal}
-                  className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+                  className="absolute right-3 top-3 text-muted-foreground transition-colors hover:text-foreground sm:right-4 sm:top-4"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -226,13 +226,13 @@ const RegisterSection = () => {
               {step === "instructions" && (
                 <div className="space-y-6">
                   <div className="text-center">
-                    <h3 className="text-2xl font-bold text-foreground mb-2">Payment Required</h3>
+                    <h3 className="mb-2 text-xl font-bold text-foreground sm:text-2xl">Payment Required</h3>
                     <p className="text-muted-foreground text-sm">Complete payment to confirm your registration</p>
                   </div>
                   <div className="glass-subtle rounded-xl p-5 space-y-3">
                     <p className="text-sm text-foreground font-medium">Instructions:</p>
                     <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
-                      <li>Proceed to the payment page</li>
+                      <li>Proceed to payment below</li>
                       <li>Scan the QR code and complete payment</li>
                       <li>Take a screenshot of the payment confirmation</li>
                       <li>Enter the UTR number and upload screenshot</li>
@@ -242,7 +242,7 @@ const RegisterSection = () => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setStep("payment")}
-                    className="btn-glow-premium w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-lg"
+                    className="btn-glow-premium w-full rounded-xl bg-primary py-4 text-base font-semibold text-primary-foreground sm:text-lg"
                   >
                     Proceed to Payment
                   </motion.button>
@@ -253,13 +253,13 @@ const RegisterSection = () => {
               {step === "payment" && (
                 <form onSubmit={handlePaymentSubmit} className="space-y-6">
                   <div className="text-center">
-                    <h3 className="text-2xl font-bold text-foreground mb-2">Complete Payment</h3>
+                    <h3 className="mb-2 text-xl font-bold text-foreground sm:text-2xl">Complete Payment</h3>
                     <p className="text-muted-foreground text-sm">Scan the QR code below to pay</p>
                   </div>
 
                   {/* QR Code placeholder */}
                   <div className="flex flex-col items-center gap-3">
-                    <div className="w-48 h-48 rounded-xl overflow-hidden border border-border bg-white p-2">
+                    <div className="h-40 w-40 overflow-hidden rounded-xl border border-border bg-white p-2 sm:h-48 sm:w-48">
                       <img
                         src="/payment-qr.png"
                         alt="Payment QR"
@@ -267,7 +267,7 @@ const RegisterSection = () => {
                       />
                     </div>
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-gradient">₹200</p>
+                      <p className="text-xl font-bold text-gradient sm:text-2xl">₹200</p>
                       <p className="text-xs text-muted-foreground">UPI / Bank Transfer</p>
                     </div>
                     <div className="text-center space-y-0.5">
@@ -308,7 +308,7 @@ const RegisterSection = () => {
                     type="submit"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
-                    className="btn-glow-premium w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-lg"
+                    className="btn-glow-premium w-full rounded-xl bg-primary py-4 text-base font-semibold text-primary-foreground sm:text-lg"
                   >
                     Submit Payment
                   </motion.button>
@@ -326,7 +326,7 @@ const RegisterSection = () => {
                     <CheckCircle2 className="w-16 h-16 text-primary mx-auto" />
                   </motion.div>
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-2">🎉 You're In!</h3>
+                    <h3 className="mb-2 text-xl font-bold text-foreground sm:text-2xl">🎉 You're In!</h3>
                     <p className="text-muted-foreground text-sm">
                       Your registration and payment details have been submitted. We'll verify and send you a confirmation email shortly.
                     </p>
