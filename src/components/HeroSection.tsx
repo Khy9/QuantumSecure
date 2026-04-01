@@ -21,11 +21,12 @@ const fadeUp = {
   },
 };
 
+
 const logos = [
   { src: cbitLogo, alt: "CBIT", round: true },
-  { src: ddcLogo, alt: "Digital Defence Club", round: true },
   { src: ieeeCbitLogo, alt: "IEEE CBIT", round: true },
   { src: ieeeEdSocLogo, alt: "IEEE Education Society", round: false },
+  { src: ddcLogo, alt: "Digital Defence Club", round: true },
 ];
 
 const HeroSection = () => {
@@ -37,24 +38,39 @@ const HeroSection = () => {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="container relative z-10 px-3 text-center sm:px-6"
+        className="container relative z-10 px-3 sm:px-6"
       >
-        {/* Institutional Logos */}
-        <motion.div variants={fadeUp} className="mx-auto mb-6 flex max-w-xs flex-wrap items-center justify-center gap-3 sm:mb-8 sm:max-w-none sm:gap-7 md:gap-8">
-          {logos.map((logo) => (
-            <div
-              key={logo.alt}
-              className={`h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 ${logo.round ? "rounded-full" : "rounded-xl"} glass-subtle flex items-center justify-center overflow-hidden p-1 sm:p-2`}
-            >
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                className={`w-full h-full object-contain ${logo.round ? "rounded-full" : ""}`}
-                style={{ mixBlendMode: "screen" }}
-              />
+        {/* Institutional Logos at top - Centered and Refined */}
+        <motion.div 
+          variants={fadeUp} 
+          className="flex flex-wrap items-center justify-center gap-4 mb-12 sm:mb-20 md:gap-8"
+        >
+          {logos.map((logo, index) => (
+            <div key={logo.alt} className="flex items-center gap-4 md:gap-8">
+              <div
+                className={`h-12 w-12 sm:h-16 sm:w-16 md:h-24 md:w-24 ${logo.round ? "rounded-full" : "rounded-xl"} glass-subtle flex items-center justify-center overflow-hidden p-1 sm:p-2 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_hsl(var(--primary)/0.3)]`}
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  fetchPriority={index === 0 ? "high" : "auto"}
+                  decoding="async"
+                  className={`w-full h-full object-contain ${logo.round ? "rounded-full" : ""}`}
+                  style={logo.alt !== "Digital Defence Club" ? { mixBlendMode: "screen" } : {}}
+                />
+              </div>
+              {index === 2 && (
+                <div className="flex items-center justify-center px-2">
+                  <span className="text-2xl sm:text-4xl font-extrabold text-primary animate-pulse select-none opacity-90">
+                    ✕
+                  </span>
+                </div>
+              )}
             </div>
           ))}
         </motion.div>
+
+        <div className="text-center">
 
         <motion.div
           variants={fadeUp}
@@ -99,6 +115,7 @@ const HeroSection = () => {
             Register
           </motion.button>
         </motion.div>
+        </div>
       </motion.div>
 
       <motion.div

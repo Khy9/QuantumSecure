@@ -9,8 +9,7 @@ const navLinks = [
   { label: "Topics", href: "#topics" },
   { label: "Schedule", href: "#schedule" },
   { label: "Contact", href: "#contact" },
-  { label: "Register", href: "/register", isRoute: true },
-  { label: "Payment", href: "/payment", isRoute: true },
+  { label: "Register", href: "#register" },
 ];
 
 const Navbar = () => {
@@ -46,29 +45,19 @@ const Navbar = () => {
 
   const handleClick = (link: typeof navLinks[0]) => {
     setMobileOpen(false);
-    if (link.isRoute) {
-      navigate(link.href);
-    } else if (!isHome) {
+    if (!isHome) {
       navigate("/" + link.href);
     }
   };
 
   const linkClass = (link: typeof navLinks[0]) => {
-    if (link.isRoute) {
-      const active = location.pathname === link.href;
-      return `text-sm transition-all duration-300 ${active ? "text-primary" : "text-muted-foreground hover:text-primary"}`;
-    }
     const active = activeSection === link.href.slice(1) && isHome;
-    return `text-sm transition-all duration-300 relative ${active ? "text-primary" : "text-muted-foreground hover:text-primary"}`;
+    return `text-base sm:text-lg transition-all duration-300 relative ${active ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary"}`;
   };
 
   const mobileLinkClass = (link: typeof navLinks[0]) => {
-    if (link.isRoute) {
-      const active = location.pathname === link.href;
-      return `transition-colors py-2 text-lg ${active ? "text-primary font-medium" : "text-muted-foreground hover:text-primary"}`;
-    }
     const active = activeSection === link.href.slice(1) && isHome;
-    return `transition-colors py-2 text-lg ${active ? "text-primary font-medium" : "text-muted-foreground hover:text-primary"}`;
+    return `transition-colors py-3 text-xl ${active ? "text-primary font-bold" : "text-muted-foreground hover:text-primary"}`;
   };
 
   return (
@@ -95,12 +84,12 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <a
               key={link.label}
-              href={link.isRoute ? undefined : (isHome ? link.href : "/" + link.href)}
-              onClick={(e) => { if (link.isRoute) e.preventDefault(); handleClick(link); }}
+              href={isHome ? link.href : "/" + link.href}
+              onClick={() => handleClick(link)}
               className={linkClass(link)}
             >
               {link.label}
-              {!link.isRoute && activeSection === link.href.slice(1) && isHome && (
+              {activeSection === link.href.slice(1) && isHome && (
                 <motion.span
                   layoutId="nav-active"
                   className="absolute -bottom-1 left-0 right-0 h-px bg-primary"
@@ -142,8 +131,8 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <a
                   key={link.label}
-                  href={link.isRoute ? undefined : (isHome ? link.href : "/" + link.href)}
-                  onClick={(e) => { if (link.isRoute) e.preventDefault(); handleClick(link); }}
+                  href={isHome ? link.href : "/" + link.href}
+                  onClick={() => handleClick(link)}
                   className={mobileLinkClass(link)}
                 >
                   {link.label}
