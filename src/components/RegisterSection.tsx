@@ -328,9 +328,21 @@ const RegisterSection = () => {
                   <div>
                     <h3 className="mb-2 text-xl font-bold text-foreground sm:text-2xl">🎉 You're In!</h3>
                     <p className="text-muted-foreground text-sm">
-                      Your registration and payment details have been submitted. We'll verify and send you a confirmation email shortly.
+                      Your registration and payment details have been submitted. Join the WhatsApp group for updates and further instructions.
                     </p>
                   </div>
+                  {/* WhatsApp Button */}
+                  <motion.a
+                    href="https://chat.whatsapp.com/J4H0JFupr3UL3FbiEgVPBf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="btn-glow-premium w-full rounded-xl bg-primary py-4 text-base font-semibold text-primary-foreground sm:text-lg inline-block"
+                  >
+                    Join WhatsApp Group
+                  </motion.a>
+                  
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
