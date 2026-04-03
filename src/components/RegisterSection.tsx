@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { useState } from "react";
-import { X, QrCode, Upload, CheckCircle2 } from "lucide-react";
+import { X, Upload, CheckCircle2 } from "lucide-react";
 
 type Step = "form" | "instructions" | "payment" | "success";
 
@@ -37,6 +37,7 @@ const RegisterSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", rollNumber: "", branchSection: "", college: "" });
   const [utr, setUtr] = useState("");
   const [screenshot, setScreenshot] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,39 +45,46 @@ const RegisterSection = () => {
   };
 
   const handlePaymentSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-   if (!screenshot) {
-    alert("Please upload payment screenshot");
-    return;
-  }
-  const data = {
-  name: formData.name,
-  email: formData.email,
-  phone: formData.phone,
-  rollNumber: formData.rollNumber,
-  branchSection: formData.branchSection,
-  college: formData.college,
-  utr: utr,
-  screenshot: screenshot ? screenshot.name : ""
-};
+    e.preventDefault();
+    if (!screenshot) {
+      alert("Please upload payment screenshot");
+      return;
+    }
 
+    setIsSubmitting(true);
 
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbxwVaNV0wRQA9DF9d0hsJt9aieMed3gCwrHSfg_VQFJIaQaZviSXM-2j5tr9RD-95SZ/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+    const base64File = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve((reader.result as string).split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(screenshot);
     });
 
-    setStep("success");
+    const driveForm = new FormData();
+    driveForm.append("name", formData.name);
+    driveForm.append("email", formData.email);
+    driveForm.append("phone", formData.phone);
+    driveForm.append("rollNumber", formData.rollNumber);
+    driveForm.append("branchSection", formData.branchSection);
+    driveForm.append("college", formData.college);
+    driveForm.append("utr", utr);
+    driveForm.append("file", base64File);
+    driveForm.append("fileName", screenshot.name);
 
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbyUkHUiQxzvFJxqg79Vioe0nOJYzXRAk1uX3K1udirvq_-N0SgtlYOEd51c_i36IoTQ/exec", {
+        method: "POST",
+        mode: "no-cors",
+        body: driveForm,
+      });
+      setStep("success");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const closeModal = () => {
     setStep("form");
@@ -193,7 +201,6 @@ const RegisterSection = () => {
         </ScrollReveal>
       </div>
 
-      {/* Modal overlay */}
       <AnimatePresence>
         {step !== "form" && (
           <motion.div
@@ -222,7 +229,6 @@ const RegisterSection = () => {
                 </button>
               )}
 
-              {/* Step 2: Instructions */}
               {step === "instructions" && (
                 <div className="space-y-6">
                   <div className="text-center">
@@ -249,22 +255,15 @@ const RegisterSection = () => {
                 </div>
               )}
 
-              {/* Step 3: Payment */}
               {step === "payment" && (
                 <form onSubmit={handlePaymentSubmit} className="space-y-6">
                   <div className="text-center">
                     <h3 className="mb-2 text-xl font-bold text-foreground sm:text-2xl">Complete Payment</h3>
                     <p className="text-muted-foreground text-sm">Scan the QR code below to pay</p>
                   </div>
-
-                  {/* QR Code placeholder */}
                   <div className="flex flex-col items-center gap-3">
                     <div className="h-40 w-40 overflow-hidden rounded-xl border border-border bg-white p-2 sm:h-48 sm:w-48">
-                      <img
-                        src="/payment-qr.png"
-                        alt="Payment QR"
-                        className="w-full h-full object-contain"
-                      />
+                      <img src="/payment-qr.png" alt="Payment QR" className="w-full h-full object-contain" />
                     </div>
                     <div className="text-center">
                       <p className="text-xl font-bold text-gradient sm:text-2xl">₹200</p>
@@ -275,7 +274,6 @@ const RegisterSection = () => {
                       <p className="text-xs text-muted-foreground">Mobile Number: <span className="text-foreground/80">8466997204</span></p>
                     </div>
                   </div>
-
                   <div>
                     <label className="text-sm text-muted-foreground mb-1.5 block">UTR / Transaction Number</label>
                     <input
@@ -287,7 +285,6 @@ const RegisterSection = () => {
                       className={inputClass}
                     />
                   </div>
-
                   <div>
                     <label className="text-sm text-muted-foreground mb-1.5 block">Payment Screenshot</label>
                     <label className="flex items-center gap-3 cursor-pointer w-full bg-muted border border-border border-dashed rounded-lg px-4 py-4 text-muted-foreground hover:border-primary/40 transition-colors duration-300">
@@ -303,19 +300,26 @@ const RegisterSection = () => {
                       />
                     </label>
                   </div>
-
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="btn-glow-premium w-full rounded-xl bg-primary py-4 text-base font-semibold text-primary-foreground sm:text-lg"
+                    disabled={isSubmitting}
+                    whileHover={!isSubmitting ? { scale: 1.03 } : {}}
+                    whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                    className="btn-glow-premium w-full rounded-xl bg-primary py-4 text-base font-semibold text-primary-foreground sm:text-lg disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    Submit Payment
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                        </svg>
+                        Submitting...
+                      </span>
+                    ) : "Submit Payment"}
                   </motion.button>
                 </form>
               )}
 
-              {/* Step 4: Success */}
               {step === "success" && (
                 <div className="text-center space-y-5 py-4">
                   <motion.div
@@ -331,7 +335,6 @@ const RegisterSection = () => {
                       Your registration and payment details have been submitted. Join the WhatsApp group for updates and further instructions.
                     </p>
                   </div>
-                  {/* WhatsApp Button */}
                   <motion.a
                     href="https://chat.whatsapp.com/J4H0JFupr3UL3FbiEgVPBf"
                     target="_blank"
@@ -342,7 +345,6 @@ const RegisterSection = () => {
                   >
                     Join WhatsApp Group
                   </motion.a>
-                  
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
