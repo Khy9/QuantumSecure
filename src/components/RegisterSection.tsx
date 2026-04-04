@@ -336,7 +336,7 @@ const RegisterSection = () => {
                     </p>
                   </div>
                   <motion.a
-                    href="https://chat.whatsapp.com/J4H0JFupr3UL3FbiEgVPBf"
+                    href="https://chat.whatsapp.com/F5odnEphs2t4PZoSqP7TKM"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.03 }}
