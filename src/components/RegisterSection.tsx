@@ -266,7 +266,7 @@ const RegisterSection = () => {
                       <img src="/payment-qr.png" alt="Payment QR" className="w-full h-full object-contain" />
                     </div>
                     <div className="text-center">
-                      <p className="text-xl font-bold text-gradient sm:text-2xl">₹200</p>
+                      <p className="text-xl font-bold text-gradient sm:text-2xl">₹100</p>
                       <p className="text-xs text-muted-foreground">UPI / Bank Transfer</p>
                     </div>
                     <div className="text-center space-y-0.5">
