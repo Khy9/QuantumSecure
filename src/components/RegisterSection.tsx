@@ -33,8 +33,7 @@ const inputClass =
   "w-full bg-muted border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/30 transition-all duration-300";
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxVN7WoUCahya_4lfobnsxZvemKVyY2ahIm_byyunUJ-DFUP9EtKQZYPH3Q1tJbUOu7/exec";
-
+  "https://script.google.com/macros/s/AKfycbwEBaz2szUHmQYu5Hm2sN-9RHRF3SEd2Wmaw6StQgyCzYTOnKl4RfLZwAn-8M6IvyHztQ/exec";
 const RegisterSection = () => {
   const [step, setStep] = useState<Step>("form");
   const [formData, setFormData] = useState({
@@ -51,16 +50,20 @@ const RegisterSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const body = new FormData();
-    body.append("name", formData.name);
-    body.append("email", formData.email);
-    body.append("phone", formData.phone);
-    body.append("rollNumber", formData.rollNumber);
-    body.append("branchSection", formData.branchSection);
-    body.append("college", formData.college);
+    const params = new URLSearchParams({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      rollNumber: formData.rollNumber,
+      branchSection: formData.branchSection,
+      college: formData.college,
+    });
 
     try {
-      await fetch(APPS_SCRIPT_URL, { method: "POST", mode: "no-cors", body });
+      await fetch(APPS_SCRIPT_URL + "?" + params.toString(), {
+        method: "GET",
+        mode: "no-cors",
+      });
       setStep("success");
     } catch (error) {
       console.error("Registration error:", error);
