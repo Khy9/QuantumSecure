@@ -62,7 +62,7 @@ const RegisterSection = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isBlockedCollege) {
-      setErrorMessage("Registration is closed for CBIT (Chaithanya Bharathi Institute of Technology) students.");
+      setErrorMessage("Registration is closed for CBIT (Chaitanya Bharathi Institute of Technology) students.");
       return;
     }
 
@@ -152,7 +152,7 @@ const RegisterSection = () => {
                 />
                 {key === "college" && isBlockedCollege && (
                   <p className="mt-2 text-sm text-destructive">
-                    Registration is closed for CBIT (Chaithanya Bharathi Institute of Technology) students.
+                    Registration is closed for CBIT (Chaitanya Bharathi Institute of Technology) students.
                   </p>
                 )}
               </div>
