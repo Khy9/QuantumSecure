@@ -34,7 +34,7 @@ const inputClass =
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbwEBaz2szUHmQYu5Hm2sN-9RHRF3SEd2Wmaw6StQgyCzYTOnKl4RfLZwAn-8M6IvyHztQ/exec";
-const IS_REGISTRATION_OPEN = false;
+const IS_REGISTRATION_CLOSED = true;
 
 const sanitizeCollegeName = (value: string) =>
   value.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -58,13 +58,12 @@ const RegisterSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const isRegistrationClosed = !IS_REGISTRATION_OPEN;
   const isBlockedCollege = blockedCollegeNames.has(sanitizeCollegeName(formData.college));
-  const isRegistrationDisabled = isRegistrationClosed || isBlockedCollege;
+  const isRegistrationDisabled = IS_REGISTRATION_CLOSED || isBlockedCollege;
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isRegistrationClosed) {
+    if (IS_REGISTRATION_CLOSED) {
       setErrorMessage("Registration is closed.");
       return;
     }
@@ -147,7 +146,7 @@ const RegisterSection = () => {
                 <input
                   type={type}
                   required
-                  disabled={isRegistrationClosed}
+                  disabled={IS_REGISTRATION_CLOSED}
                   placeholder={placeholder}
                   value={formData[key as keyof typeof formData]}
                   onChange={(e) => {
@@ -185,7 +184,7 @@ const RegisterSection = () => {
                   </svg>
                   Registering...
                 </span>
-              ) : isRegistrationClosed ? "Registration Closed" : "Register Now →"}
+              ) : IS_REGISTRATION_CLOSED ? "Registration Closed" : "Register Now →"}
             </motion.button>
           </form>
         </ScrollReveal>
