@@ -34,6 +34,7 @@ const inputClass =
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbwEBaz2szUHmQYu5Hm2sN-9RHRF3SEd2Wmaw6StQgyCzYTOnKl4RfLZwAn-8M6IvyHztQ/exec";
+const IS_REGISTRATION_OPEN = false;
 
 const sanitizeCollegeName = (value: string) =>
   value.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -57,10 +58,16 @@ const RegisterSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const isRegistrationClosed = !IS_REGISTRATION_OPEN;
   const isBlockedCollege = blockedCollegeNames.has(sanitizeCollegeName(formData.college));
+  const isRegistrationDisabled = isRegistrationClosed || isBlockedCollege;
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isRegistrationClosed) {
+      setErrorMessage("Registration is closed.");
+      return;
+    }
     if (isBlockedCollege) {
       setErrorMessage("Registration is closed for CBIT (Chaitanya Bharathi Institute of Technology) students.");
       return;
@@ -119,9 +126,9 @@ const RegisterSection = () => {
               ⚡ Free Entry — Limited Seats
             </motion.span>
             <h2 className="text-3xl sm:text-4xl font-bold">
-              <span className="text-gradient">Register</span> Now
+              <span className="text-gradient">Registration</span> Closed
             </h2>
-            <p className="text-muted-foreground mt-3">Secure your spot at QuantumSecure</p>
+            <p className="text-muted-foreground mt-3">Registrations are currently closed.</p>
           </div>
         </ScrollReveal>
 
@@ -140,6 +147,7 @@ const RegisterSection = () => {
                 <input
                   type={type}
                   required
+                  disabled={isRegistrationClosed}
                   placeholder={placeholder}
                   value={formData[key as keyof typeof formData]}
                   onChange={(e) => {
@@ -164,9 +172,9 @@ const RegisterSection = () => {
 
             <motion.button
               type="submit"
-              disabled={isSubmitting || isBlockedCollege}
-              whileHover={!isSubmitting && !isBlockedCollege ? { scale: 1.03 } : {}}
-              whileTap={!isSubmitting && !isBlockedCollege ? { scale: 0.98 } : {}}
+              disabled={isSubmitting || isRegistrationDisabled}
+              whileHover={!isSubmitting && !isRegistrationDisabled ? { scale: 1.03 } : {}}
+              whileTap={!isSubmitting && !isRegistrationDisabled ? { scale: 0.98 } : {}}
               className="btn-glow-premium w-full rounded-xl bg-primary py-4 text-base font-semibold text-primary-foreground sm:text-lg disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
@@ -177,7 +185,7 @@ const RegisterSection = () => {
                   </svg>
                   Registering...
                 </span>
-              ) : "Register Now →"}
+              ) : isRegistrationClosed ? "Registration Closed" : "Register Now →"}
             </motion.button>
           </form>
         </ScrollReveal>
