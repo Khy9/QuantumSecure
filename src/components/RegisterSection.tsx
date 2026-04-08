@@ -34,6 +34,16 @@ const inputClass =
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbwEBaz2szUHmQYu5Hm2sN-9RHRF3SEd2Wmaw6StQgyCzYTOnKl4RfLZwAn-8M6IvyHztQ/exec";
+
+const normalizeCollegeName = (value: string) =>
+  value.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+
+const blockedCollegeNames = new Set([
+  "cbit",
+  "chaithanyabharathiinstituteoftechnology",
+  "chaitanyabharathiinstituteoftechnology",
+]);
+
 const RegisterSection = () => {
   const [step, setStep] = useState<Step>("form");
   const [formData, setFormData] = useState({
@@ -45,9 +55,18 @@ const RegisterSection = () => {
     college: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const isBlockedCollege = blockedCollegeNames.has(normalizeCollegeName(formData.college));
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isBlockedCollege) {
+      setErrorMessage("Registration is closed for CBIT (Chaithanya Bharathi Institute of Technology) students.");
+      return;
+    }
+
+    setErrorMessage("");
     setIsSubmitting(true);
 
     const params = new URLSearchParams({
@@ -75,6 +94,7 @@ const RegisterSection = () => {
 
   const closeModal = () => {
     setStep("form");
+    setErrorMessage("");
     setFormData({ name: "", email: "", phone: "", rollNumber: "", branchSection: "", college: "" });
   };
 
@@ -122,17 +142,31 @@ const RegisterSection = () => {
                   required
                   placeholder={placeholder}
                   value={formData[key as keyof typeof formData]}
-                  onChange={(e) => setFormData({ ...formData, [key]: e.target.value })}
+                  onChange={(e) => {
+                    setFormData({ ...formData, [key]: e.target.value });
+                    if (key === "college" && errorMessage) {
+                      setErrorMessage("");
+                    }
+                  }}
                   className={inputClass}
                 />
+                {key === "college" && isBlockedCollege && (
+                  <p className="mt-2 text-sm text-destructive">
+                    Registration is closed for CBIT (Chaithanya Bharathi Institute of Technology) students.
+                  </p>
+                )}
               </div>
             ))}
 
+            {errorMessage && (
+              <p className="text-sm text-destructive">{errorMessage}</p>
+            )}
+
             <motion.button
               type="submit"
-              disabled={isSubmitting}
-              whileHover={!isSubmitting ? { scale: 1.03 } : {}}
-              whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+              disabled={isSubmitting || isBlockedCollege}
+              whileHover={!isSubmitting && !isBlockedCollege ? { scale: 1.03 } : {}}
+              whileTap={!isSubmitting && !isBlockedCollege ? { scale: 0.98 } : {}}
               className="btn-glow-premium w-full rounded-xl bg-primary py-4 text-base font-semibold text-primary-foreground sm:text-lg disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (

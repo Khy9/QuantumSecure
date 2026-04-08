@@ -101,6 +101,13 @@ const HeroSection = () => {
           Workshop on Post-Quantum Cryptography, Blockchain & Ethical Hacking
         </motion.p>
 
+        <motion.p
+          variants={fadeUp}
+          className="mx-auto mb-8 max-w-xl rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-xs font-medium text-primary sm:mb-12 sm:text-sm"
+        >
+          Note: Registration for CBIT students is closed.
+        </motion.p>
+
         <motion.div variants={fadeUp}>
           <motion.button
             onClick={() => {
