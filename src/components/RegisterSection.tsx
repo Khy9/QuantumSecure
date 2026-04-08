@@ -24,9 +24,9 @@ const RegisterSection = () => {
               🔒 Registrations Closed
             </motion.span>
             <h2 className="text-3xl sm:text-4xl font-bold">
-              <span className="text-gradient">Register</span> Now
+              <span className="text-gradient">Registration</span> Closed
             </h2>
-            <p className="text-muted-foreground mt-3">Secure your spot at QuantumSecure</p>
+            <p className="text-muted-foreground mt-3">Registrations are currently closed.</p>
           </div>
         </ScrollReveal>
 
