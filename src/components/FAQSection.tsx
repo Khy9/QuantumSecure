@@ -10,8 +10,8 @@ const faqs = [
   { q: "Who can attend this workshop?", a: "Anyone interested in cybersecurity, cryptography, blockchain, or ethical hacking can attend — students, professionals, and enthusiasts are all welcome." },
   { q: "Is prior knowledge required?", a: "No prior knowledge is required. The workshop is designed to accommodate beginners while also offering depth for those with experience." },
   { q: "Will certificates be provided?", a: "Yes, all participants will receive a certificate of participation upon completing the workshop." },
-  { q: "What is the registration fee?", a: "The registration fee is ₹200, payable via UPI or bank transfer during the registration process." },
-  { q: "How do I confirm my registration?", a: "After filling the registration form, complete the payment on the payment page, enter your UTR number, and upload a screenshot of the transaction." },
+  { q: "What is the registration fee?", a: "The registration fee is Free" },
+  { q: "How do I confirm my registration?", a: "After filling the registration form, join the whatsapp group" },
   { q: "Where is the venue?", a: "The workshop will be held at Chaitanya Bharathi Institute of Technology (CBIT), Hyderabad." },
   { q: "How can I contact for queries?", a: "You can reach us through the contact section on this website or join our WhatsApp group for quick responses." },
 ];
