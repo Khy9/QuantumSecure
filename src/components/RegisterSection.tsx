@@ -35,7 +35,7 @@ const inputClass =
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbwEBaz2szUHmQYu5Hm2sN-9RHRF3SEd2Wmaw6StQgyCzYTOnKl4RfLZwAn-8M6IvyHztQ/exec";
 
-const normalizeCollegeName = (value: string) =>
+const sanitizeCollegeName = (value: string) =>
   value.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
 
 const blockedCollegeNames = new Set([
@@ -57,7 +57,7 @@ const RegisterSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const isBlockedCollege = blockedCollegeNames.has(normalizeCollegeName(formData.college));
+  const isBlockedCollege = blockedCollegeNames.has(sanitizeCollegeName(formData.college));
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
